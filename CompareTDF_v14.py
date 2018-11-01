@@ -62,7 +62,6 @@ print('Filtering -> {:.2f}s'.format(t3 - t2))
 print('Snap      -> {:.2f}s'.format(t_end - t3))
 print('TOTAL     -> {:.2f}s ({} input events)'.format(t_end - t_start, df2.Count().GetValue()))
 
-
 fout = ROOT.TFile.Open('test.root')
 tree = fout.Get('test_tree')
 print('Selected events:')

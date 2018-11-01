@@ -32,8 +32,7 @@ TOTAL     -> 30.37s (422111 passed events over 883595)
 Different executions of the same code lead to different results in term of selected events, as shown below.
 
 
-**Python**
-Four successive executions of the python script lead to the four outputs:
+**Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other).
 ```
 TOTAL     -> 28.84s (883595 input events)
 Selected events:
@@ -63,7 +62,7 @@ Selected events:
 
 ```
 
-**C++**
+**C++** The output of `Count()` varies but the number of saved events if always the same. 
 
 ```
 52.4492 seconds for 883595 input events.
