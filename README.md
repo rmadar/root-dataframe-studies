@@ -11,7 +11,7 @@
   + number of branches (flat/vectors)
 
 
-## Python vs C++ (using ROOT v6.14.04)
+## Python vs C++  - using ROOT v6.14.04
 
 **Python**
 ```
@@ -73,9 +73,9 @@ Selected events:
 ```
 
 ```
-51.0029 seconds for 883595 input events.
+52.7641 seconds for 883595 input events.
 Selected events:
-  - df.Count(): 422138
+  - df.Count(): 422595
   - TTree.GetEntries(): 421638
 ```
 
