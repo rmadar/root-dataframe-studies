@@ -29,8 +29,16 @@ void RunTDF(){
 
   clock_t stop = clock();
   double dt = double(stop - start) / CLOCKS_PER_SEC;
-  cout << dt << " seconds for " << df_output->Count().GetValue() << " passing events, over " << df.Count().GetValue() << endl;
+  cout << dt << " seconds for " << df.Count().GetValue() << " input events." << endl;
   
+  TFile *f = TFile::Open("test.root");
+  TTree *t = (TTree*) f->Get("test_tree");
+  int Ntree = t->GetEntries();
+  int Ntdf  = df_output->Count().GetValue();
+  cout << "Selected events:" << endl;
+  cout << "  - df.Count(): " << Ntdf << endl;
+  cout << "  - TTree.GetEntries(): " << Ntree << endl;
+
   return;
 }
 

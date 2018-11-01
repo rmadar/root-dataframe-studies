@@ -50,9 +50,9 @@ df2 = df2.Define("mmm","mmm_Zveto_2015  || mmm_Zveto_2016");
 df2 = df2.Define("SS","SSee||SSem||SSmm");
 df2 = df2.Define("LLL","eee || eem || emm || mmm");
 df2 = df2.Define("iChan","SSee*1 + SSem*2 + SSmm*3 + eee*4 + eem*5 + emm*6 + mmm*7");
-t2  = default_timer()
+t2 = default_timer()
 df3 = df2.Filter("iChan>0")
-t3  = default_timer()
+t3 = default_timer()
 dfouput = df3.Snapshot('test_tree', 'test.root', list2ROOTvec(branch_to_save)) 
 t_end = default_timer()
 
@@ -60,6 +60,12 @@ print('Loading   -> {:.2f}s'.format(t1 - t_start))
 print('Defining  -> {:.2f}s'.format(t2 - t1))
 print('Filtering -> {:.2f}s'.format(t3 - t2))
 print('Snap      -> {:.2f}s'.format(t_end - t3))
-print('TOTAL     -> {:.2f}s ({} passed events over {})'.format(t_end - t_start, dfouput.Count().GetValue(), df2.Count().GetValue()))
+print('TOTAL     -> {:.2f}s ({} input events)'.format(t_end - t_start, df2.Count().GetValue()))
 
+
+fout = ROOT.TFile.Open('test.root')
+tree = fout.Get('test_tree')
+print('Selected events:')
+print('  - df.Count(): {}'.format(dfouput.Count().GetValue()))
+print('  - TTree.GetEntries(): {}'.format(tree.GetEntries()))
 
