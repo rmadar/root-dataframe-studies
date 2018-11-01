@@ -33,7 +33,7 @@ Selected events:
 ```
 
 
-**v6.14** `RDataFrame` where the running time is almost divided by 3 (`df.Define()` is now very fast, probably lazy then).
+**v6.14** `RDataFrame` where the running time is almost divided by 3 (`df.Define()` is now very fast, probably lazy as it should be).
 
 ```
 Loading   -> 0.31s
@@ -47,7 +47,7 @@ Selected events:
 ```
 
 
-## Python vs C++  - using ROOT v6.14.04
+## Python vs C++ - using ROOT v6.14.04
 
 **Python**
 ```
@@ -63,9 +63,9 @@ TOTAL     -> 30.37s (422111 passed events over 883595)
 57.7551 seconds for 423074 passing events, over 883595
 ```
 
-## Interesting feature
+## Unstable number of selected events
 
-Different executions of the same code lead to different results in term of selected events, as shown below. *This is not observed in ROOT v12.06, where results are always correct.*
+Different executions of the same code lead to different results in term of selected events, as shown below. *This is not observed in ROOT v12.06, where results are always the same.*
 
 
 **Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other).
@@ -127,3 +127,8 @@ Selected events:
   - df.Count(): 420172
   - TTree.GetEntries(): 421638
 ```
+
+
+## Wishlist for `ROOT.DataFrame`
+
+  + If there is no event passing, store an empty `TTree` with the expected structure. Right now, the file is simply empty. 
