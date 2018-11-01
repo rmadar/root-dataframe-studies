@@ -4,11 +4,47 @@
 
 **ROOT versions**
 
+  + v6.12.06, with `ROOT.Experimental.TDataFrame()`
+  + v6.14.04, with `ROOT.RDataFrame()`
+
 **Python version**
 
+  + python 2.7
+
 **Input file**
-  + number of events
+
+  + number of events: 0.9 millions
   + number of branches (flat/vectors)
+
+
+## ROOT v6.12 vs v6.14 (python)
+
+**v6.12** `TDataFrame` where is seems that `df.Define()` command is not lazy (as it should be)
+
+```
+Loading   -> 0.47s
+Defining  -> 3.82s
+Filtering -> 0.44s
+Snap      -> 110.09s
+TOTAL     -> 114.82s (883595 input events)
+Selected events:
+  - df.Count(): 423074
+  - TTree.GetEntries(): 423074
+```
+
+
+**v6.14** `RDataFrame` where the running time is almost divided by 3 (`df.Define()` is now very fast, probably lazy then).
+
+```
+Loading   -> 0.31s
+Defining  -> 0.16s
+Filtering -> 0.13s
+Snap      -> 27.90s
+TOTAL     -> 28.50s (883595 input events)
+Selected events:
+  - df.Count(): 421633
+  - TTree.GetEntries(): 421633
+```
 
 
 ## Python vs C++  - using ROOT v6.14.04
@@ -22,7 +58,7 @@ Snap      -> 29.77s
 TOTAL     -> 30.37s (422111 passed events over 883595)
 ```
 
-**C++**
+**C++** is almost twice slower.
 ```
 57.7551 seconds for 423074 passing events, over 883595
 ```
@@ -32,7 +68,7 @@ TOTAL     -> 30.37s (422111 passed events over 883595)
 Different executions of the same code lead to different results in term of selected events, as shown below.
 
 
-**Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other).
+**Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other). *This is not observed in ROOT v12.06, where both `Count()` and `GetEntries()` output are always correct.*
 ```
 TOTAL     -> 28.84s (883595 input events)
 Selected events:
