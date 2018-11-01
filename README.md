@@ -129,6 +129,14 @@ Selected events:
 ```
 
 
+## Comparison with an explicit event loop
+
+Without computing new variable (and selecting half of the events to be saved)
+```
+19.5094 seconds for 883595 input events.
+```
+
+
 ## Wishlist for `ROOT.DataFrame`
 
   + If there is no event passing, store an empty `TTree` with the expected structure. Right now, the file is simply empty. 
