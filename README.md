@@ -33,7 +33,7 @@ Selected events:
 ```
 
 
-**v6.14** `RDataFrame` where the running time is almost divided by 3 (`df.Define()` is now very fast, probably lazy as it should be).
+**v6.14** `RDataFrame` where the running time is divided by ~4 (`df.Define()` is now very fast, probably lazy as it should be).
 
 ```
 Loading   -> 0.31s
