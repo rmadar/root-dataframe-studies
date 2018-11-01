@@ -65,10 +65,10 @@ TOTAL     -> 30.37s (422111 passed events over 883595)
 
 ## Interesting feature
 
-Different executions of the same code lead to different results in term of selected events, as shown below.
+Different executions of the same code lead to different results in term of selected events, as shown below. *This is not observed in ROOT v12.06, where results are always correct.*
 
 
-**Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other). *This is not observed in ROOT v12.06, where both `Count()` and `GetEntries()` output are always correct.*
+**Python** four successive executions of the python script lead to the four following outputs. Both `Count()` and `TTree.GetEntries()` output change (but they are always equal to each other).
 ```
 TOTAL     -> 28.84s (883595 input events)
 Selected events:
