@@ -14,7 +14,7 @@
 **Input file**
 
   + number of events: 0.9 millions
-  + number of branches (flat/vectors)
+  + number of branches: 455 (flat and vector)
 
 
 ## ROOT v6.12 vs v6.14 (python)
