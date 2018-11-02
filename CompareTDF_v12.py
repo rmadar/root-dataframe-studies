@@ -37,7 +37,7 @@ branch_to_save = ['el_pt', 'mu_pt', 'HT_all', 'met_met', 'met_phi', 'jet_truthfl
                   'weight_mc', 'weight_pileup', 'weight_leptonSF', 'weight_bTagSF_MV2c10_77', 'weight_jvt']
 
 t_start = default_timer()
-df2 = ROOT.Experimental.TDataFrame("nominal_Loose", "/home/rmadar/cernbox/ATLAS/Analysis/data/r21/tag212380/mc16a/SS3L/group.phys-top.364253.Sherpa.DAOD_TOPQ1.e5916_s3126_r9364_p3404.SM4t-212380_mc16a_SS3L_v1_output_root/*.root")
+df2 = ROOT.Experimental.TDataFrame("nominal_Loose", "input.root");
 
 t1 = default_timer()
 df2 = df2.Define("SSee","SSee_2015 || SSee_2016");

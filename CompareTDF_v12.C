@@ -12,7 +12,7 @@ void RunTDF(int Nevts=10000){
   gROOT->ProcessLine("gErrorIgnoreLevel = 2001;");
     
   clock_t start = clock();
-  ROOT::Experimental::TDataFrame df = ROOT::Experimental::TDataFrame("nominal_Loose", "/home/rmadar/cernbox/ATLAS/Analysis/data/r21/tag212380/mc16a/SS3L/group.phys-top.364253.Sherpa.DAOD_TOPQ1.e5916_s3126_r9364_p3404.SM4t-212380_mc16a_SS3L_v1_output_root/*.root");
+  ROOT::Experimental::TDataFrame df = ROOT::Experimental::TDataFrame("nominal_Loose", "input.root");
 
   // Option 1
   auto df_output = df.Define("SSee","SSee_2015 || SSee_2016")
