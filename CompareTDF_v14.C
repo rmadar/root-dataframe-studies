@@ -10,8 +10,8 @@ void RunTDF(){
 
   clock_t start = clock();
   
-  ROOT::EnableImplicitMT();
-  ROOT::RDataFrame df = ROOT::RDataFrame("nominal_Loose", "input.root");
+  //ROOT::EnableImplicitMT();
+  ROOT::RDataFrame df = ROOT::RDataFrame("nominal_Loose", "input_small.root");
 
   // Option 1
   auto df_output = df.Define("SSee","SSee_2015 || SSee_2016")

@@ -8,7 +8,7 @@ using namespace std;
 
 void RunTDF(int Nevts=10000){
 
-  ROOT::EnableImplicitMT();
+  //ROOT::EnableImplicitMT();
   gROOT->ProcessLine("gErrorIgnoreLevel = 2001;");
     
   clock_t start = clock();

@@ -1,5 +1,5 @@
 import ROOT
-ROOT.ROOT.EnableImplicitMT()
+#ROOT.ROOT.EnableImplicitMT()
 ROOT.gROOT.ProcessLine('gErrorIgnoreLevel = 2001;')
 from timeit import default_timer
     
@@ -37,7 +37,7 @@ branch_to_save = ['el_pt', 'mu_pt', 'HT_all', 'met_met', 'met_phi', 'jet_truthfl
                   'weight_mc', 'weight_pileup', 'weight_leptonSF', 'weight_bTagSF_MV2c10_77', 'weight_jvt']
 
 t_start = default_timer()
-df2 = ROOT.Experimental.TDataFrame("nominal_Loose", "input.root");
+df2 = ROOT.Experimental.TDataFrame("nominal_Loose", "input_small.root");
 
 t1 = default_timer()
 df2 = df2.Define("SSee","SSee_2015 || SSee_2016");
