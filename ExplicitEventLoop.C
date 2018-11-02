@@ -10,8 +10,11 @@ using namespace std;
 void RunEvtLoop(){
 
   clock_t start = clock();
+
   
-  TFile *fin = TFile::Open("input.root");
+  // Input file/Trees
+  // ----------------
+  TFile *fin = TFile::Open("input_small.root");
   TTree *tin = (TTree*) fin->Get("nominal_Loose");
   tin->SetBranchStatus("*",0);
   tin->SetBranchStatus("el_pt",1);
@@ -71,27 +74,83 @@ void RunEvtLoop(){
   tin->SetBranchStatus("eem*",1);
   tin->SetBranchStatus("emm*",1);
   tin->SetBranchStatus("mmm*",1);
-    
+
+  
+  int SSee_2015(false), SSem_2015(false), SSmm_2015(false);
+  int SSee_2016(false), SSem_2016(false), SSmm_2016(false);
+  int eee_2015(false), eem_2015(false), emm_2015(false), mmm_2015(false);
+  int eee_2016(false), eem_2016(false), emm_2016(false), mmm_2016(false);
+  tin->SetBranchAddress("SSee_2015", &SSee_2015);
+  tin->SetBranchAddress("SSem_2015", &SSem_2015);
+  tin->SetBranchAddress("SSmm_2015", &SSmm_2015);
+  tin->SetBranchAddress("SSee_2016", &SSee_2016);
+  tin->SetBranchAddress("SSem_2016", &SSem_2016);
+  tin->SetBranchAddress("SSmm_2016", &SSmm_2016);
+  tin->SetBranchAddress("eee_2015", &eee_2015);
+  tin->SetBranchAddress("eem_2015", &eem_2015);
+  tin->SetBranchAddress("emm_2015", &emm_2015);
+  tin->SetBranchAddress("mmm_2015", &mmm_2015);
+  tin->SetBranchAddress("eee_2016", &eee_2016);
+  tin->SetBranchAddress("eem_2016", &eem_2016);
+  tin->SetBranchAddress("emm_2016", &emm_2016);
+  tin->SetBranchAddress("mmm_2016", &mmm_2016);
+
+  
+
+  // Preparing the ouput
+  // -------------------
   TFile *fout = new TFile("output.root","RECREATE");
   TTree *tout = tin->CloneTree(0);
-  int Nentries = tin->GetEntries();
+  int SSee(false), SSem(false), SSmm(false);
+  int eee(false), eem(false), emm(false), mmm(false);
+  int SS(false), LLL(false);
+  int iChan(-1);
+  tout->Branch("SSee", &SSee, "I");
+  tout->Branch("SSem", &SSem, "I");
+  tout->Branch("SSmm", &SSmm, "I");
+  tout->Branch("eee", &eee, "I");
+  tout->Branch("eem", &eem, "I");
+  tout->Branch("emm", &emm, "I");
+  tout->Branch("mmm", &mmm, "I");
+  tout->Branch("SS", &SS, "I");
+  tout->Branch("LLL", &LLL, "I");
+  tout->Branch("iChan", &iChan, "I");
 
+  
+  
+  // Event loop
+  // ----------
+  int Nentries = tin->GetEntries();
   for (int i=0; i<Nentries ; i++){
 
     // Load the event
     tin->GetEntry(i);
 
     // Compute some new variables (to be implemented)
+    SSee = SSee_2015 || SSee_2016;
+    SSem = SSem_2015 || SSem_2016;
+    SSmm = SSmm_2015 || SSmm_2016;
+    eee = eee_2015 || eee_2016;
+    eem = eem_2015 || eem_2016;
+    emm = emm_2015 || emm_2016;
+    mmm = mmm_2015 || mmm_2016;
+    SS = SSee || SSem || SSmm;
+    LLL = eee || eem || emm || mmm;
+    iChan = SSee*1 + SSem*2 + SSmm*3 + eee*4 + eem*5 + emm*6 + mmm*7;
+
     
     // Applying some selections
-    if (i%2==0) // emulate an efficiency selection of 0.5
+    if (iChan<=0)
       continue;
-
+    
     // Filling the output tree	
     tout->Fill();
 
   }
   
+
+  // Saving ouput
+  // ------------
   fout->cd();
   tout->Write();
   fout->Close();
