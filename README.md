@@ -63,6 +63,28 @@ TOTAL     -> 30.37s (422111 passed events over 883595)
 57.7551 seconds for 423074 passing events, over 883595
 ```
 
+## Python vs C++ - using ROOT v6.12.06
+
+**Python**
+```
+Loading   -> 0.47s
+Defining  -> 3.82s
+Filtering -> 0.44s
+Snap      -> 110.09s
+TOTAL     -> 114.82s (883595 input events)
+Selected events:
+  - df.Count(): 423074
+  - TTree.GetEntries(): 423074
+```
+
+
+**C++**
+```
+261.37 seconds for 883595 input events.
+```
+
+
+
 ## Unstable number of selected events
 
 Different executions of the same code lead to different results in term of selected events, as shown below. *This is not observed in ROOT v12.06, where results are always the same.*
