@@ -1,5 +1,7 @@
 # Benchmarking TDataFrame ROOT objects
 
+The whole discussion about the test being done here can be found [this post](https://root-forum.cern.ch/t/tdataframe-feedback-performance-comparisons-df-count-instability) of the ROOT forum.
+
 ## Details of the benchmarking
 
 **ROOT versions**
