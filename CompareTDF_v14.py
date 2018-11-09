@@ -1,5 +1,5 @@
 import ROOT
-#ROOT.ROOT.EnableImplicitMT()
+ROOT.ROOT.EnableImplicitMT()
 ROOT.gROOT.ProcessLine('gErrorIgnoreLevel = 2001;')
 from timeit import default_timer
     
@@ -37,7 +37,7 @@ branch_to_save = ['el_pt', 'mu_pt', 'HT_all', 'met_met', 'met_phi', 'jet_truthfl
                   'weight_mc', 'weight_pileup', 'weight_leptonSF', 'weight_bTagSF_MV2c10_77', 'weight_jvt']
 
 t_start = default_timer()
-df2 = ROOT.ROOT.RDataFrame("nominal_Loose", 'input_small.root')
+df2 = ROOT.ROOT.RDataFrame("nominal_Loose", 'input.root')
 
 t1 = default_timer()
 df2 = df2.Define("SSee","SSee_2015 || SSee_2016");
@@ -53,7 +53,7 @@ df2 = df2.Define("iChan","SSee*1 + SSem*2 + SSmm*3 + eee*4 + eem*5 + emm*6 + mmm
 t2 = default_timer()
 df3 = df2.Filter("iChan>0")
 t3 = default_timer()
-dfouput = df3.Snapshot('test_tree', 'test.root', list2ROOTvec(branch_to_save)) 
+dfouput = df3.Snapshot('tree', 'output.root', list2ROOTvec(branch_to_save)) 
 t_end = default_timer()
 
 print('Loading   -> {:.2f}s'.format(t1 - t_start))
@@ -62,8 +62,8 @@ print('Filtering -> {:.2f}s'.format(t3 - t2))
 print('Snap      -> {:.2f}s'.format(t_end - t3))
 print('TOTAL     -> {:.2f}s ({} input events)'.format(t_end - t_start, df2.Count().GetValue()))
 
-fout = ROOT.TFile.Open('test.root')
-tree = fout.Get('test_tree')
+fout = ROOT.TFile.Open('output.root')
+tree = fout.Get('tree')
 print('Selected events:')
 print('  - df.Count(): {}'.format(dfouput.Count().GetValue()))
 print('  - TTree.GetEntries(): {}'.format(tree.GetEntries()))
